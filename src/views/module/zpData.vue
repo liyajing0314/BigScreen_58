@@ -2,6 +2,9 @@
 <template>
 	<pannel-head :title="title">
 		<div class="bg-box">
+			<div>
+				
+			</div>
 		</div>
 	</pannel-head>
 </template>
