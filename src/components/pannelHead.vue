@@ -49,6 +49,7 @@
 		}
 		.pannel-content {
 			min-height: 50px;
+			margin-bottom: 32px;
 		}
 	}
 </style>

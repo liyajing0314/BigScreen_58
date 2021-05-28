@@ -1,9 +1,36 @@
 <!-- 招聘数据 -->
 <template>
 	<pannel-head :title="title">
-		<div class="bg-box">
-			<div>
-				
+		<div class="zp-container">
+			<div class="bg-box">
+				<div class="labels">
+					城市合作伙伴数
+				</div>
+				<div class="count">3128</div>
+			</div>
+			<div class="bg-box">
+				<div class="labels">
+					代理商数
+				</div>
+				<div class="count">3128</div>
+			</div>
+			<div class="bg-box">
+				<div class="labels">
+					企业数
+				</div>
+				<div class="count">3128</div>
+			</div>
+			<div class="bg-box">
+				<div class="labels">
+					猎头数
+				</div>
+				<div class="count">3128</div>
+			</div>
+			<div class="bg-box">
+				<div class="labels">
+					岗位数
+				</div>
+				<div class="count">3128</div>
 			</div>
 		</div>
 	</pannel-head>
@@ -24,5 +51,29 @@
 	}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+	.zp-container {
+		margin-bottom: 26px;
+	}
+	.bg-box {
+		height:35px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding:0 12px;
+		background: url('~@/assets/images/box2.png') no-repeat center center / 100% 100%;
+		margin-bottom: 6px;
+		.labels {
+			color:#C4E2FB;
+			font-size: 14px;
+		}
+		.count {
+			font-size: 18px;
+			font-weight: 600;
+			color:#ffffff;
+		}
+	}
+	.bg-box:nth-child(even){
+		background: url('~@/assets/images/box2_next.png') no-repeat center center / 100% 100%;
+	}
 </style>
