@@ -1,0 +1,54 @@
+.container {
+	min-height:100vh;
+	color:#ffffff;
+	font-family: Microsoft YaHei;
+	.head {
+		position: relative;
+		.head-title {
+			width:1205px;
+			height:100px;
+			line-height: 100px;
+			background: url('~@/assets/images/head.png') no-repeat center center;
+			background-size: cover;
+			margin: 0 auto;
+			text-align: center;
+			color:#C4E2FB;
+			font-size: 36px;
+			font-family: PingFangSC-Semibold, PingFang SC;
+			font-weight: 600;
+			position: relative;
+		}	
+	}
+	.content {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 30px 0;
+		min-height:calc(100vh - 109px - 60px);
+		.con-left {
+			width:480px;
+			min-width: 480px;
+		}
+		.con-right {
+			width:480px;
+			min-width: 480px;
+		}
+		.con-center {
+			flex:1;
+			padding: 0 40px 0 35px;
+		}
+		.con-left,
+		.con-right,
+		.con-center {
+			height:100%;
+		}
+	}
+	.flex-line {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+.supervise_bg {
+	background: url('~@/assets/images/bg.png') no-repeat center center;
+	background-size: cover;
+	background-color: #00194E;
+}
