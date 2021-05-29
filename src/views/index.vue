@@ -11,6 +11,7 @@
 				<fx-data></fx-data>
 			</div>
 			<div class="con-center">
+				<center-top></center-top>
 			</div>
 			<div class="con-right">
 				<operation-condition></operation-condition>
@@ -22,6 +23,7 @@
 	</div>
 </template>
 <script>
+	import centerTop from './module/centerTop.vue'
 	import xbfb from './module/xbfb.vue'
 	import nlfb from './module/nlfb.vue'
 	import ysqk from './module/ysqk.vue'
@@ -32,7 +34,7 @@
 	import fgData from './module/fgData'
 	import {formatTime} from '@/utils/index'
 	export default {
-		components:{fgData,zpData,bxData,fxData,operationCondition,ysqk,nlfb,xbfb},
+		components:{fgData,zpData,bxData,fxData,operationCondition,ysqk,nlfb,xbfb,centerTop},
 		data(){
 			return {
 				data:{},
