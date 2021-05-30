@@ -38,7 +38,7 @@ module.exports = {
 	devServer: {
 		proxy: {
 			'/': {
-				target: 'https://www.fastmock.site/mock/49ecb4bad1fa1d015183fd4e6af14317/twb',
+				target: 'http://8.130.55.149:9001',
 				ws: false,
 				changeOrigin: true
 			},

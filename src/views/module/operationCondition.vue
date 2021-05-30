@@ -6,7 +6,9 @@
 				<div class="labels">
 					近30天任务数
 				</div>
-				<div class="count">3128</div>
+				<div class="count">
+					{{data.totalTaskNum}}
+				</div>
 			</div>
 			<div class="complete-box">
 				<div class="complete-left">
@@ -14,19 +16,33 @@
 						<img src="~@/assets/images/ywc.png" class="icon-oper"/>
 						<div class="line-oper">
 							<span class="line-labels">近30天完成数</span>
-							<span class="line-count ywc">6655</span>
+							<span class="line-count ywc">
+								<countTo
+								  :start-val="0"
+								  :end-val="Number(data.accomplishTaskNum)"
+								  separator=","
+								/>
+							</span>
 						</div>
 					</div>
 					<div>
 						<img src="~@/assets/images/wwc.png" class="icon-oper"/>
 						<div class="line-oper">
 							<span class="line-labels">近30天未完成数</span>
-							<span class="line-count wwc">6655</span>
+							<span class="line-count wwc">
+								<countTo
+								  :start-val="0"
+								  :end-val="Number(data.notQualifieTaskNum)"
+								  separator=","
+								/>
+							</span>
 						</div>
 					</div>
 				</div>
 				<div class="item-box">
-					<div class="item-top">90%</div>
+					<div class="item-top">
+						{{data.percentageComplete}}
+					</div>
 					<div class="item-bottom">完成率</div>
 				</div>
 			</div>
@@ -38,13 +54,13 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
+		props:['data'],
 		data(){
 			return {
-				title:'作业数据'
+				title:'作业数据',
 			}
 		},
 		methods:{
-			
 		}
 	}
 </script>

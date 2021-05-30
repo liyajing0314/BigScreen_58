@@ -4,19 +4,51 @@
 		<div class="bx-container">
 			<div class="bg-box">
 				<div class="labels">企业数</div>
-				<div class="counts"><span class="num">1645</span>个</div>
+				<div class="counts">
+					<span class="num">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.insuranceAgentNum)"
+						  separator=","
+						/>
+					</span>个
+				</div>
 			</div>
 			<div class="bg-box">
 				<div class="labels">劳动者</div>
-				<div class="counts"><span class="num">1645</span>人</div>
+				<div class="counts">
+					<span class="num">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.insuranceWorkerNum)"
+						  separator=","
+						/>
+					</span>人
+				</div>
 			</div>
 			<div class="bg-box">
 				<div class="labels">均人数</div>
-				<div class="counts"><span class="num">1645</span>人/企业</div>
+				<div class="counts">
+					<span class="num">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.insuranceAveragePerson)"
+						  separator=","
+						/>
+					</span>人/企业
+				</div>
 			</div>
 			<div class="bg-box">
 				<div class="labels">均保额</div>
-				<div class="counts"><span class="num">45</span>元/人年</div>
+				<div class="counts">
+					<span class="num">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.insuranceAverageCoverage)"
+						  separator=","
+						/>
+					</span>元/人年
+				</div>
 			</div>
 		</div>
 	</pannel-head>
@@ -26,6 +58,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
+		props:['data'],
 		data(){
 			return {
 				title:'保险数据'

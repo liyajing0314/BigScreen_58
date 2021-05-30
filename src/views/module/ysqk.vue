@@ -4,23 +4,47 @@
 		<div class="ysqk-container">
 			<div class="left-box">
 				<div class="box-content">
-					<div>525255</div>
+					<div>
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.goodReputationNum)"
+						  separator=","
+						/>
+					</div>
 					<div class="label">累计好评数</div>
 				</div>
 			</div>
 			<div class="right-box">
 				<div class="box-content">
-					<div>525255</div>
+					<div>
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.issueNum)"
+						  separator=","
+						/>
+					</div>
 					<div class="label">累计问题数</div>
 				</div>
 				<div>
 					<div class="zg-box">
 						<div class="zg-lable">已整改</div>
-						<div class="counts">77447</div>
+						<div class="counts">
+							<countTo
+							  :start-val="0"
+							  :end-val="Number(data.hasRectificationNum)"
+							  separator=","
+							/>
+						</div>
 					</div>
 					<div class="zg-box zgz">
 						<div class="zg-lable">整改中</div>
-						<div class="counts">77447</div>
+						<div class="counts">
+							<countTo
+							  :start-val="0"
+							  :end-val="Number(data.changesInThe)"
+							  separator=","
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -32,6 +56,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
+		props:['data'],
 		data(){
 			return {
 				title:'验收情况'

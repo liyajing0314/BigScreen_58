@@ -18,12 +18,17 @@ import './assets/scss/style.scss';
 import './assets/scss/index.scss';
 
 //引入echart
-import echarts from 'echarts'
+import * as echarts from 'echarts';
 Vue.prototype.$echarts = echarts
 
 import * as api from '@/api/api'
 Vue.prototype.$api = api
 
+import axios from 'axios'
+Vue.prototype.$axios = axios
+
+import countTo from 'vue-count-to'
+Vue.component("countTo",countTo);
 Vue.config.productionTip = false;
 
 new Vue({

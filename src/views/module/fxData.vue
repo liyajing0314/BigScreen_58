@@ -1,39 +1,66 @@
 <!-- 发薪数据 -->
-<!-- 覆盖数据 -->
 <template>
 	<pannel-head :title="title">
 		<div>
 			<div class="bg-box">
 				<div class="item-box">
-					<div class="item-top">317</div>
+					<div class="item-top">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.payrollAgentNum)"
+						  separator=","
+						/>
+					</div>
 					<div class="item-bottom">企业数</div>
 				</div>
 				<div class="item-box">
-					<div class="item-top">317</div>
+					<div class="item-top">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.payrollWorkerNum)"
+						  separator=","
+						/>
+					</div>
 					<div class="item-bottom">劳动者数</div>
 				</div>
 				<div class="item-box">
-					<div class="item-top">317</div>
+					<div class="item-top">
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.payrollAverageMonthlyPay)"
+						  separator=","
+						/>
+					</div>
 					<div class="item-bottom">均月薪/人</div>
 				</div>
 			</div>
 			<div class="box-list">
 				<div class="box-list-item">
 					<div class="item-left">
-						<div class="title">北京</div>
+						<div class="title">{{data.highestSalaryCity}}</div>
 						<div class="bottom max">最高月薪</div>
 					</div>
 					<div class="item-right">
-						<span class="symbol">￥</span><span>158966</span>
+						<span class="symbol">￥</span>
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.highestSalaryNum)"
+						  separator=","
+						/>
 					</div>
 				</div>
 				<div class="box-list-item">
 					<div class="item-left">
-						<div class="title">江西</div>
+						<div class="title">{{data.lowestSalaryCity}}</div>
 						<div class="bottom min">最低月薪</div>
 					</div>
 					<div class="item-right">
-						<span class="symbol">￥</span><span>158966</span>
+						<span class="symbol">￥</span>
+						<countTo
+						  :start-val="0"
+						  :end-val="Number(data.lowestSalaryNum)"
+						  separator=","
+						/>
 					</div>
 				</div>
 			</div>
@@ -46,6 +73,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
+		props:['data'],
 		data(){
 			return {
 				title:'发薪数据'

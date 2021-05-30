@@ -5,24 +5,28 @@
 		</div>
 		<div class="content"> 
 			<div class="con-left">
-				<fg-data></fg-data>
-				<zp-data></zp-data>
-				<bx-data></bx-data>
-				<fx-data></fx-data>
+				<fg-data :data="dataNum" v-if="dataNum"></fg-data>
+				<zp-data :data="dataNum" v-if="dataNum"></zp-data>
+				<bx-data :data="dataNum" v-if="dataNum"></bx-data>
+				<fx-data :data="dataNum" v-if="dataNum"></fx-data>
 			</div>
 			<div class="con-center">
-				<center-top></center-top>
+				<center-top :data="dataNum" v-if="dataNum"></center-top>
+				<map-components :data="cityCoversCondition"></map-components>
+				<center-bottom :data="dataNum" v-if="dataNum"></center-bottom>
 			</div>
 			<div class="con-right">
-				<operation-condition></operation-condition>
-				<ysqk></ysqk>
-				<nlfb></nlfb>
-				<xbfb></xbfb>
+				<operation-condition :data="dataNum" v-if="dataNum"></operation-condition>
+				<ysqk :data="dataNum" v-if="dataNum"></ysqk>
+				<nlfb :data="nlData"></nlfb>
+				<xbfb :data="xbData"></xbfb>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
+	import centerBottom from './module/centerBottom.vue'
+	import mapComponents from './module/map.vue'
 	import centerTop from './module/centerTop.vue'
 	import xbfb from './module/xbfb.vue'
 	import nlfb from './module/nlfb.vue'
@@ -34,24 +38,42 @@
 	import fgData from './module/fgData'
 	import {formatTime} from '@/utils/index'
 	export default {
-		components:{fgData,zpData,bxData,fxData,operationCondition,ysqk,nlfb,xbfb,centerTop},
+		components:{fgData,zpData,bxData,fxData,operationCondition,ysqk,nlfb,xbfb,centerTop,mapComponents,centerBottom},
 		data(){
 			return {
 				data:{},
-				date: new Date(),
-				timer:null
+				dataNum:{},
+				nlData:[],
+				xbData:[],
+				cityCoversCondition:[]
 			}
 		},
 		mounted() {
-			// this.getData()
+			this.getData()
 		},
 		methods:{
-			getData(){ //客户端下载数量&流量统计
-				this.$api.queryClientDownloads().then(res=>{
+			getData(){ 
+				this.$api.getServeData().then(res=>{
 					if(res.code == '200'){
-						this.data = res.result
+						let result = res.result ? res.result : {}
+						this.data = result
+						this.dataNum = result ? result.dataNum : {}
+						let distribution = result ? result.distribution : [];
+						this.nlData = []
+						this.xbData = []
+						distribution.forEach(item=>{
+							if(item.type == '1'){
+								this.nlData.push(item)
+							}else if(item.type == '2'){
+								this.xbData.push(item)
+							}
+						})
+						
+						this.cityCoversCondition = result ? result.cityCoversCondition : []
 					}
 				})
+				
+				// this.$axios.get('./data.json')
 			}
 		},
 	}

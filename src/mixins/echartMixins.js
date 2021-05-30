@@ -1,5 +1,4 @@
 import echart from '@/common/echart/index'
-import pannelHead from '@/components/pannelHead'
 
 export default {
 	data(){
@@ -7,9 +6,8 @@ export default {
 			options:{}
 		}
 	},
-	props:['title'],
 	components:{
-		echart,pannelHead
+		echart
 	},
 	mounted() {
 		this.getChart()
