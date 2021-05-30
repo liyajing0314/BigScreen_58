@@ -1,6 +1,6 @@
 <!-- 年龄分布 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div id="nlfb" style="height:240px;"></div>
 	</pannel-head>
 </template>
@@ -16,7 +16,7 @@
 				chart:null
 			}
 		},
-		props:['data'],
+		props:['data','randomData','index'],
 		mounted () {
 			this.chart = this.$echarts.init(document.getElementById('nlfb'))
 			this.getChart();

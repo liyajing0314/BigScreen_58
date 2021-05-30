@@ -1,6 +1,6 @@
 <!-- 作业情况 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div class="op-container">
 			<div class="bg-box">
 				<div class="labels">
@@ -54,10 +54,10 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
-				title:'作业数据',
+				title:'作业情况(近30天)',
 			}
 		},
 		methods:{

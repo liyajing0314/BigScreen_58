@@ -1,6 +1,6 @@
 <!-- 验收情况 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div class="ysqk-container">
 			<div class="left-box">
 				<div class="box-content">
@@ -56,7 +56,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
 				title:'验收情况'

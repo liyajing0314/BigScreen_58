@@ -1,6 +1,6 @@
 <!-- 覆盖数据 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div class="bg-box">
 			<div class="item-box">
 				<div class="item-top">
@@ -40,7 +40,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
 				title:'SaaS覆盖数据'
@@ -61,7 +61,6 @@
 		padding: 16px;
 		display: flex;
 		justify-content: space-between;
-		margin-bottom: 32px;
 	}
 	.item-box {
 		width:144px;

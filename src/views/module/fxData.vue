@@ -1,6 +1,6 @@
 <!-- 发薪数据 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div>
 			<div class="bg-box">
 				<div class="item-box">
@@ -73,7 +73,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
 				title:'发薪数据'

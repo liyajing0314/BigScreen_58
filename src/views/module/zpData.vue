@@ -1,32 +1,32 @@
 <!-- 招聘数据 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div class="zp-container">
-			<div class="bg-box">
+			<div class="bg-box " :class="{'oddBox':type === 'odd','evenBox':type === 'even'}">
 				<div class="labels">
 					城市合作伙伴数
 				</div>
 				<div class="count">{{data.cityPartnerNum}}</div>
 			</div>
-			<div class="bg-box">
+			<div class="bg-box" :class="{'evenBox':type === 'odd','oddBox':type === 'even'}">
 				<div class="labels">
 					代理商数
 				</div>
 				<div class="count">{{data.agentNum}}</div>
 			</div>
-			<div class="bg-box">
+			<div class="bg-box" :class="{'oddBox':type === 'odd','evenBox':type === 'even'}">
 				<div class="labels">
 					企业数
 				</div>
 				<div class="count">{{data.enterpriseNum}}</div>
 			</div>
-			<div class="bg-box">
+			<div class="bg-box" :class="{'evenBox':type === 'odd','oddBox':type === 'even'}">
 				<div class="labels">
 					猎头数
 				</div>
 				<div class="count">{{data.headhuntingNum}}</div>
 			</div>
-			<div class="bg-box">
+			<div class="bg-box" :class="{'oddBox':type === 'odd','evenBox':type === 'even'}">
 				<div class="labels">
 					岗位数
 				</div>
@@ -40,11 +40,17 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
-				title:'招聘数据'
+				title:'招聘数据',
+				type:"odd"
 			}
+		},
+		mounted() {
+			setInterval(()=>{
+				this.type = this.type === 'odd' ? 'even' : 'odd'
+			},3000)
 		},
 		methods:{
 			
@@ -62,7 +68,6 @@
 		justify-content: space-between;
 		align-items: center;
 		padding:0 12px;
-		background: url('~@/assets/images/box2.png') no-repeat center center / 100% 100%;
 		margin-bottom: 6px;
 		.labels {
 			color:#C4E2FB;
@@ -74,7 +79,26 @@
 			color:#ffffff;
 		}
 	}
-	.bg-box:nth-child(even){
+	.oddBox{
+		background: url('~@/assets/images/box2.png') no-repeat center center / 100% 100%;
+	}
+	.evenBox {
 		background: url('~@/assets/images/box2_next.png') no-repeat center center / 100% 100%;
+	}
+	@keyframes changeBg1 {
+		0% {
+			background-image: url('~@/assets/images/box2.png')
+		}
+		100% {
+			background-image: url('~@/assets/images/box2_next.png')
+		}
+	}
+	@keyframes changeBg2 {
+		0% {
+			background-image: url('~@/assets/images/box2_next.png')
+		}
+		100% {
+			background-image: url('~@/assets/images/box2.png')
+		}
 	}
 </style>

@@ -1,6 +1,6 @@
 <!-- 性别分布 -->
 <template>
-	<pannel-head :title="title">
+	<pannel-head :title="title" :randomData="randomData" :index="index">
 		<div>
 			<div class="xb-container">
 				<img src="~@/assets/images/man.png" class="man" v-for="(item,index) in man" :key="index"/>
@@ -25,7 +25,7 @@
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
-		props:['data'],
+		props:['data','randomData','index'],
 		data(){
 			return {
 				title:'性别分布',
