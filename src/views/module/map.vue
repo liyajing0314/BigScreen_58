@@ -1,10 +1,10 @@
 <template>
-	<div style="height: 616px;position: relative;">
+	<div class="mapContainer">
 		<div class="head">
 			<img src="~@/assets/images/line.png" class="line" />
 			<div>全国项目分布</div>
 		</div>
-		<div id="map" style="height: 616px;"></div>
+		<div id="map" style="height: 100%"></div>
 	</div>
 </template>
 
@@ -239,6 +239,10 @@
 </script>
 
 <style scoped lang="scss">
+	.mapContainer {
+		height: 616px;
+		position: relative;
+	}
 	.head {
 		position: absolute;
 		left: 0;

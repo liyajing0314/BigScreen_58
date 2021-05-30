@@ -5,7 +5,7 @@
 			<span>{{title}}</span>
 			<img src="~@/assets/images/pannel_line.png" class="pannel-line" />
 		</div>
-		<div class="lg" v-show="isShow"></div>
+		<div class="lg" :class="{'animation':isShow}"></div>
 		<img src="~@/assets/images/boundary.png" class="boundary" />
 		<div class="pannel-content">
 			<slot></slot>
@@ -89,6 +89,8 @@
 		height: 1px;
 		position: relative;
 		top:10px;
+	}
+	.animation {
 		animation: sun 1.8s infinite linear;
 	}
 	@keyframes sun {

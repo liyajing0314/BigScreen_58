@@ -84,6 +84,7 @@
 		}
 		.labels {
 			color: #C4E2FB;
+			font-size: 14px;
 		}
 		.nums {
 			font-size: 24px;

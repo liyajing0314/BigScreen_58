@@ -97,11 +97,12 @@
 		}
 		.nums {
 			font-size: 24px;
-			margin-bottom: 10px;
-			margin-top: 6px;
+			margin-bottom: 18px;
+			margin-top: 8px;
 		}
 		.labels {
 			color:#C4E2FB;
+			font-size: 14px;
 		}
 	}
 </style>

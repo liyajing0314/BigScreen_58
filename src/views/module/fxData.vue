@@ -140,6 +140,7 @@
 		.bottom {
 			height:36px;
 			line-height: 36px;
+			font-size: 14px;
 		}
 		.max {
 			color:#D06667;

@@ -1,7 +1,7 @@
 <!-- 年龄分布 -->
 <template>
 	<pannel-head :title="title" :randomData="randomData" :index="index">
-		<div id="nlfb" style="height:240px;"></div>
+		<div id="nlfb" class="charts"></div>
 	</pannel-head>
 </template>
 
@@ -123,5 +123,8 @@
 </script>
 
 <style scoped lang="scss">
+	.charts {
+		height:260px;
+	}
 </style>
 
