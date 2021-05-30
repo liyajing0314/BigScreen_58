@@ -192,6 +192,7 @@
 				};
 
 				this.chart.setOption(option, true)
+				
 			},
 			convertData(data) {
 				let seriesData = [];

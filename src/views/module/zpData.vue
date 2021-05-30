@@ -52,9 +52,6 @@
 				this.type = this.type === 'odd' ? 'even' : 'odd'
 			},3000)
 		},
-		methods:{
-			
-		}
 	}
 </script>
 
@@ -84,21 +81,5 @@
 	}
 	.evenBox {
 		background: url('~@/assets/images/box2_next.png') no-repeat center center / 100% 100%;
-	}
-	@keyframes changeBg1 {
-		0% {
-			background-image: url('~@/assets/images/box2.png')
-		}
-		100% {
-			background-image: url('~@/assets/images/box2_next.png')
-		}
-	}
-	@keyframes changeBg2 {
-		0% {
-			background-image: url('~@/assets/images/box2_next.png')
-		}
-		100% {
-			background-image: url('~@/assets/images/box2.png')
-		}
 	}
 </style>

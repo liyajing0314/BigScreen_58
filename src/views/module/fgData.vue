@@ -65,11 +65,10 @@
 	.item-box {
 		width:144px;
 		height:100%;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.05);
 		color: #FFFFFF;
 		font-size: 28px;
 		text-align: center;
+		background: url('~@/assets/images/box.png') no-repeat center center / 100% 100%;
 	}
 	.item-top {
 		height:63px;
@@ -78,8 +77,6 @@
 	.item-bottom {
 		height: 25px;
 		line-height: 25px;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.05);
 		color: #C4E2FB;
 		font-size: 14px;
 	}
