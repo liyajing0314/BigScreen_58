@@ -75,6 +75,7 @@
 			getData() {
 				this.$api.getServeData().then(res => {
 					if (res.code == '200') {
+						console.info(res)
 						let result = res.result ? res.result : {}
 						this.data = result
 						this.dataNum = result ? result.dataNum : {}
@@ -92,8 +93,6 @@
 						this.cityCoversCondition = result ? result.cityCoversCondition : []
 					}
 				})
-
-				// this.$axios.get('./data.json')
 			},
 			randomNum() {
 				let add = 0;

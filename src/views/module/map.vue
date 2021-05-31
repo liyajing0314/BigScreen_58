@@ -14,6 +14,18 @@
 		data() {
 			return {
 				geoCoordMap: {}, //地图数据 
+				option:null,
+				chart:null,
+				areaList:[
+					[126.19, 45.76],//东北地区
+					[116.22, 39.93],//京津冀地区
+					[117.49, 30.36],//湖北江浙沪地区
+					[113.58, 23.87],//湖南两广深圳地区
+					[98.37, 27.94],//西南西藏地区
+					[97.67, 41.89],//新疆蒙古地区
+				],
+				areaIndex:0,
+				dataIndex:0
 			}
 		},
 		mounted() {
@@ -59,7 +71,7 @@
 
 				this.chart = this.$echarts.init(document.getElementById("map"))
 
-				let option = {
+				this.option = {
 					tooltip: {
 						show: true,
 						formatter: function(params) {
@@ -121,7 +133,7 @@
 						geoIndex: 0,
 						aspectScale: 0.75,
 						roam: true,
-						//zoom:1.1,
+						zoom:1.1,
 						label: {
 							normal: {
 								show: false,
@@ -191,7 +203,32 @@
 					}]
 				};
 
-				this.chart.setOption(option, true)
+				this.chart.setOption(this.option, true)
+				
+				this.event()
+			},
+			event(){ //地图移动事件
+				// setTimeout(()=>{
+				// 	this.option.series[0].zoom = 2.5
+				// 	this.chart.setOption(this.option, true)
+				// },2000)
+				//东北地区  center: [126.19, 45.76],	
+				//京津冀地区  center: [116.22, 39.93],	
+				//湖北江浙沪地区 center: [117.49, 30.36],
+				//湖南两广深圳地区 center: [113.58, 23.87],
+				//西南西藏地区 center: [98.37, 27.94],
+				//新疆蒙古地区 center: [97.67, 41.89],
+				//京津冀
+				//缩小到全国地图  每个地区停留5秒左右
+				
+				setTimeout(()=>{
+					this.option.series[0].zoom = 2.5
+					this.chart.setOption(this.option, true)
+				},5000)
+				setInterval(()=>{
+					this.option.series[0].center = [126.19, 45.76]
+					this.chart.setOption(this.option, true)
+				},5000)
 				
 			},
 			convertData(data) {
