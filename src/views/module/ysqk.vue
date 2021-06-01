@@ -7,7 +7,7 @@
 					<div>
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.goodReputationNum)"
+						  :end-val="Number(data.goodReputationNum || 0)"
 						  separator=","
 						/>
 					</div>
@@ -19,7 +19,7 @@
 					<div>
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.issueNum)"
+						  :end-val="Number(data.issueNum || 0)"
 						  separator=","
 						/>
 					</div>
@@ -31,7 +31,7 @@
 						<div class="counts">
 							<countTo
 							  :start-val="0"
-							  :end-val="Number(data.hasRectificationNum)"
+							  :end-val="Number(data.hasRectificationNum || 0)"
 							  separator=","
 							/>
 						</div>
@@ -41,7 +41,7 @@
 						<div class="counts">
 							<countTo
 							  :start-val="0"
-							  :end-val="Number(data.changesInThe)"
+							  :end-val="Number(data.changesInThe || 0)"
 							  separator=","
 							/>
 						</div>

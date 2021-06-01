@@ -19,6 +19,16 @@
 		props:['data','randomData','index'],
 		mounted () {
 			this.chart = this.$echarts.init(document.getElementById('nlfb'))
+			this.chart.showLoading({
+			   text : '正在加载数据',
+			   maskColor:'#030D17',
+			   textColor:'white'
+			}); 
+			
+			window.onresize =()=> {
+			    this.chart.resize();
+			}
+			
 			this.getChart();
 		},
 		watch: {
@@ -93,6 +103,7 @@
 				    ]
 				};
 				this.chart.setOption(this.options, true)
+				this.chart.hideLoading();
 				let index = 0
 				setInterval(()=>{
 					this.chart.dispatchAction({

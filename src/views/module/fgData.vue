@@ -6,7 +6,7 @@
 				<div class="item-top">
 					<countTo
 					  :start-val="0"
-					  :end-val="data.projectNum"
+					  :end-val="data.projectNum || 0"
 					  separator=","
 					/>
 				</div>

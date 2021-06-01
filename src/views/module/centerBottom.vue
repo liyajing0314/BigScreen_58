@@ -5,7 +5,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.totalProjectNum)"
+				  :end-val="Number(data.totalProjectNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -15,7 +15,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.inSuitProjectNum)"
+				  :end-val="Number(data.inSuitProjectNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -25,7 +25,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.intelligentizeRemouldProjectNum)"
+				  :end-val="Number(data.intelligentizeRemouldProjectNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -35,7 +35,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.workCardNum)"
+				  :end-val="Number(data.workCardNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -45,7 +45,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.beaconNum)"
+				  :end-val="Number(data.beaconNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -54,7 +54,7 @@
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.squareNum)"
+				  :end-val="Number(data.squareNum || 0)"
 				  separator=","
 				/>
 			</span>

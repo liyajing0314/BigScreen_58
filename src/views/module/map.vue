@@ -1,11 +1,12 @@
 <template>
-	<div class="mapContainer">
+	<!-- <div class="mapContainer">
 		<div class="head">
 			<img src="~@/assets/images/line.png" class="line" />
 			<div>全国项目分布</div>
 		</div>
-		<div id="map" style="height: 100%"></div>
-	</div>
+		<div id="map" class="mapChart"></div>
+	</div> -->
+	<div id="map" class="mapChart"></div>
 </template>
 
 <script>
@@ -17,59 +18,64 @@
 				option:null,
 				chart:null,
 				areaList:[
-					[126.19, 45.76],//东北地区
-					[116.22, 39.93],//京津冀地区
-					[117.49, 30.36],//湖北江浙沪地区
-					[113.58, 23.87],//湖南两广深圳地区
-					[98.37, 27.94],//西南西藏地区
-					[97.67, 41.89],//新疆蒙古地区
+					[125.45, 47.31],//东北地区
+					[114.95, 39.05],//京津冀地区
+					[117.98, 30.85],//湖北江浙沪地区
+					[116.66, 23.35],//湖南两广深圳地区
+					[98.82, 29.60],//西南西藏地区
+					[97.98, 39.90],//新疆蒙古地区
+					[114.95, 39.05],//京津冀地区
 				],
 				areaIndex:0,
-				dataIndex:0
+				dataIndex:0,   // 0 综合指数 synthesizeNum  1 任务数 taskNum 2 改造数 remouldNum
+				interval:null,
+				synthesizeData:[], //综合指数
+				taskData:[],//任务数
+				remouldData:[],//改造数
+				zoom:0.6,
+				center:null,
 			}
 		},
 		mounted() {
-			this.getChart()
+			let that = this
+			this.geoCoordMap = {};
+			let mapFeatures = mapJsonConfig.features;
+			mapFeatures.forEach(function(v) {
+				// 地区名称
+				var name = v.properties.name;
+				// 地区经纬度
+				that.geoCoordMap[name] = v.properties.cp;
+			});
+			
+			this.$echarts.registerMap('china', mapJsonConfig)
+			this.chart = this.$echarts.init(document.getElementById("map"))
+			this.chart.showLoading({
+			   text : '正在加载数据',
+			   maskColor:'#030D17',
+			   textColor:'white'
+			}); 
+			
+			window.onresize =()=> {
+			    this.chart.resize();
+			}
+			
 		},
 		props: ['data'],
 		watch: {
 			data: {
 				handler(n) {
-					this.getChart()
+					this.getData()
 				},
 				deep: true
 			}
 		},
 		methods: {
-			getChart() {
+			getChart(data1,data2) {
 				let that = this
-				let outdata = [];
-
-				var max = 6000,
-					min = 10;
-				var maxSize4Pin = 100,
+				let max = 6000,
+					min = 10,
+				    maxSize4Pin = 100,
 					minSize4Pin = 20;
-
-				this.data.forEach((item) => {
-					outdata.push({
-						name: item.provinceName,
-						value: item.synthesizeNum
-					})
-				})
-
-
-				this.geoCoordMap = {};
-				let mapFeatures = mapJsonConfig.features;
-				mapFeatures.forEach(function(v) {
-					// 地区名称
-					var name = v.properties.name;
-					// 地区经纬度
-					that.geoCoordMap[name] = v.properties.cp;
-				});
-
-				this.$echarts.registerMap('china', mapJsonConfig)
-
-				this.chart = this.$echarts.init(document.getElementById("map"))
 
 				this.option = {
 					tooltip: {
@@ -90,6 +96,8 @@
 								show: false
 							}
 						},
+						zoom:that.zoom,
+						center:that.center,
 						layoutSize: "100%",
 						itemStyle: {
 							normal: {
@@ -133,7 +141,6 @@
 						geoIndex: 0,
 						aspectScale: 0.75,
 						roam: true,
-						zoom:1.1,
 						label: {
 							normal: {
 								show: false,
@@ -142,7 +149,7 @@
 								show: false,
 							}
 						},
-						data: outdata,
+						data: data1,
 					}, {
 						type: 'effectScatter',
 						coordinateSystem: 'geo',
@@ -198,51 +205,85 @@
 							var b = maxSize4Pin - a * max;
 							return a * val[2] + b * 1.2;
 						},
-						data: this.convertData(outdata),
+						data: data2,
 						showEffectOn: 'render',
 					}]
 				};
-
 				this.chart.setOption(this.option, true)
+				this.chart.hideLoading();
 				
-				this.event()
-				window.onresize =()=> {
-				    this.chart.resize();
-				}
 			},
 			event(){ //地图移动事件
-				// setTimeout(()=>{
-				// 	this.option.series[0].zoom = 2.5
-				// 	this.chart.setOption(this.option, true)
-				// },2000)
-				//东北地区  center: [126.19, 45.76],	
-				//京津冀地区  center: [116.22, 39.93],	
-				//湖北江浙沪地区 center: [117.49, 30.36],
-				//湖南两广深圳地区 center: [113.58, 23.87],
-				//西南西藏地区 center: [98.37, 27.94],
-				//新疆蒙古地区 center: [97.67, 41.89],
+				//东北地区  
+				//京津冀地区 
+				//湖北江浙沪地区 
+				//湖南两广深圳地区 
+				//西南西藏地区 
+				//新疆蒙古地区 
 				//京津冀
 				//缩小到全国地图  每个地区停留5秒左右
-				
-				
+				clearInterval(this.interval)
 				this.areaIndex = 0
-				
 				setTimeout(()=>{
-					console.info('放大操作',this.option)
-					this.option.series[0].zoom = 2.5
-					this.chart.setOption(this.option, true)
-				},2000)
+					this.interval = setInterval(()=>{
+						if(this.areaIndex === this.areaList.length){
+							if(this.dataIndex === 2){
+								this.dataIndex = 0
+							}else{
+								this.dataIndex += 1
+							}
+							
+							let data = []
+							if(this.dataIndex === 0){
+								data = this.synthesizeData
+							}else if(this.dataIndex === 1){
+								data = this.taskData
+							}else if(this.dataIndex === 2){
+								data = this.remouldData
+							}
+							this.zoom = 0.6
+							this.center = null
+							
+							this.getChart(data,this.convertData(data))
+							this.event()
+						}else{
+							this.zoom = 1.8
+							this.center = this.areaList[this.areaIndex]
+							let data = []
+							if(this.dataIndex === 0){
+								data = this.synthesizeData
+							}else if(this.dataIndex === 1){
+								data = this.taskData
+							}else if(this.dataIndex === 2){
+								data = this.remouldData
+							}
+							
+							this.getChart(data,this.convertData(data))
+							this.areaIndex += 1
+						}
+					},5000)
+				},0)
+			},
+			getData(){
+				this.data.forEach((item) => {
+					this.synthesizeData.push({
+						name: item.provinceName,
+						value: item.synthesizeNum
+					})
+					this.taskData.push({
+						name: item.provinceName,
+						value: item.taskNum
+					})
+					this.remouldData.push({
+						name: item.provinceName,
+						value: item.remouldNum
+					})
+				})
 				
-				setInterval(()=>{
-					console.info('移动操作')
-					if(this.areaIndex === this.areaList.length - 1){
-						this.areaIndex = 0
-					}
-					this.option.series[0].center = this.areaList[this.areaIndex]
-					this.chart.setOption(this.option, true)
-					this.areaIndex += this.areaIndex
-				},3000)
-				
+				this.getChart(this.synthesizeData,this.convertData(this.synthesizeData))
+				setTimeout(()=>{
+					this.event()
+				},5000)
 			},
 			convertData(data) {
 				let seriesData = [];
@@ -275,13 +316,14 @@
 							break;
 					}
 
-					var geoCoord = this.geoCoordMap[name];
+					let geoCoord = this.geoCoordMap[name];
 					if (geoCoord) {
 						seriesData.push({
 							name: name,
 							value: geoCoord.concat(data[i].value)
 						});
 					}
+					
 				}
 				return seriesData;
 			},
@@ -290,25 +332,13 @@
 </script>
 
 <style scoped lang="scss">
-	.mapContainer {
-		height: 616px;
-		position: relative;
-	}
-	.head {
-		position: absolute;
+	.mapChart {
+		position: absolute !important;
+		width:100%;
+		height:100%;
 		left: 0;
-		right: 0;
-		margin: 0 auto;
-		top: 40px;
-		z-index: 10;
-		text-align: center;
-		font-size: 28px;
-		font-weight: 600;
-		color: #FFFFFF;
-
-		.line {
-			width: 184px;
-			margin-bottom: 25px;
-		}
+		top:0;
+		z-index: 1;
+		opacity: 0.8;
 	}
 </style>

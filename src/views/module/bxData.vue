@@ -8,7 +8,7 @@
 					<span class="num">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.insuranceAgentNum)"
+						  :end-val="Number(data.insuranceAgentNum || 0)"
 						  separator=","
 						/>
 					</span>个
@@ -20,7 +20,7 @@
 					<span class="num">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.insuranceWorkerNum)"
+						  :end-val="Number(data.insuranceWorkerNum || 0)"
 						  separator=","
 						/>
 					</span>人
@@ -32,7 +32,7 @@
 					<span class="num">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.insuranceAveragePerson)"
+						  :end-val="Number(data.insuranceAveragePerson || 0)"
 						  separator=","
 						/>
 					</span>人/企业
@@ -44,7 +44,7 @@
 					<span class="num">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.insuranceAverageCoverage)"
+						  :end-val="Number(data.insuranceAverageCoverage || 0)"
 						  separator=","
 						/>
 					</span>元/人年

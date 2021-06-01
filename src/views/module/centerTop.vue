@@ -6,7 +6,7 @@
 				<div class="nums">
 					<countTo
 					  :start-val="0"
-					  :end-val="Number(data.ecologicalPartnerNum)"
+					  :end-val="Number(data.ecologicalPartnerNum || 0) "
 					  separator=","
 					/>
 				</div>
@@ -19,7 +19,7 @@
 				<div class="nums">
 					<countTo
 					  :start-val="0"
-					  :end-val="Number(data.facilitatorNum)"
+					  :end-val="Number(data.facilitatorNum || 0)"
 					  separator=","
 					/>
 				</div>
@@ -32,7 +32,7 @@
 				<div class="nums">
 					<countTo
 					  :start-val="0"
-					  :end-val="Number(data.projectManagerNum)"
+					  :end-val="Number(data.projectManagerNum || 0)"
 					  separator=","
 					/>
 				</div>
@@ -45,7 +45,7 @@
 				<div class="nums">
 					<countTo
 					  :start-val="0"
-					  :end-val="Number(data.projectSupervisorNum)"
+					  :end-val="Number(data.projectSupervisorNum || 0)"
 					  separator=","
 					/>
 				</div>
@@ -58,7 +58,7 @@
 				<div class="nums">
 					<countTo
 					  :start-val="0"
-					  :end-val="Number(data.workerNum)"
+					  :end-val="Number(data.workerNum || 0)"
 					  separator=","
 					/>
 				</div>

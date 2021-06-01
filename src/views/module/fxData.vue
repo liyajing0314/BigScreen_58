@@ -7,7 +7,7 @@
 					<div class="item-top">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.payrollAgentNum)"
+						  :end-val="Number(data.payrollAgentNum || 0)"
 						  separator=","
 						/>
 					</div>
@@ -17,7 +17,7 @@
 					<div class="item-top">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.payrollWorkerNum)"
+						  :end-val="Number(data.payrollWorkerNum || 0)"
 						  separator=","
 						/>
 					</div>
@@ -27,7 +27,7 @@
 					<div class="item-top">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.payrollAverageMonthlyPay)"
+						  :end-val="Number(data.payrollAverageMonthlyPay || 0)"
 						  separator=","
 						/>
 					</div>
@@ -44,7 +44,7 @@
 						<span class="symbol">￥</span>
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.highestSalaryNum)"
+						  :end-val="Number(data.highestSalaryNum || 0)"
 						  separator=","
 						/>
 					</div>
@@ -58,7 +58,7 @@
 						<span class="symbol">￥</span>
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.lowestSalaryNum)"
+						  :end-val="Number(data.lowestSalaryNum || 0)"
 						  separator=","
 						/>
 					</div>
