@@ -206,6 +206,9 @@
 				this.chart.setOption(this.option, true)
 				
 				this.event()
+				window.onresize =()=> {
+				    this.chart.resize();
+				}
 			},
 			event(){ //地图移动事件
 				// setTimeout(()=>{
@@ -221,14 +224,24 @@
 				//京津冀
 				//缩小到全国地图  每个地区停留5秒左右
 				
+				
+				this.areaIndex = 0
+				
 				setTimeout(()=>{
+					console.info('放大操作',this.option)
 					this.option.series[0].zoom = 2.5
 					this.chart.setOption(this.option, true)
-				},5000)
+				},2000)
+				
 				setInterval(()=>{
-					this.option.series[0].center = [126.19, 45.76]
+					console.info('移动操作')
+					if(this.areaIndex === this.areaList.length - 1){
+						this.areaIndex = 0
+					}
+					this.option.series[0].center = this.areaList[this.areaIndex]
 					this.chart.setOption(this.option, true)
-				},5000)
+					this.areaIndex += this.areaIndex
+				},3000)
 				
 			},
 			convertData(data) {

@@ -116,7 +116,10 @@
 					seriesIndex: 0,
 					dataIndex: 0
 				});
-			
+				
+				window.onresize =()=> {
+				    this.chart.resize();
+				}
 			}
 		}
 	}
