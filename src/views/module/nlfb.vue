@@ -18,6 +18,7 @@
 		},
 		props:['data','randomData','index'],
 		mounted () {
+			let that = this
 			this.chart = this.$echarts.init(document.getElementById('nlfb'))
 			this.chart.showLoading({
 			   text : '正在加载数据',
@@ -25,9 +26,9 @@
 			   textColor:'white'
 			}); 
 			
-			window.onresize =()=> {
-			    this.chart.resize();
-			}
+			window.addEventListener("resize", function () {
+				that.chart.resize()
+			});
 			
 			this.getChart();
 		},
