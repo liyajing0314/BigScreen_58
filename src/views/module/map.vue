@@ -15,7 +15,7 @@
 		data() {
 			return {
 				geoCoordMap: {}, //地图数据 
-				option:null,
+				option:{},
 				chart:null,
 				areaList:[
 					[125.45, 47.31],//东北地区
@@ -48,12 +48,6 @@
 			});
 			
 			this.$echarts.registerMap('china', mapJsonConfig)
-			this.chart = this.$echarts.init(document.getElementById("map"))
-			this.chart.showLoading({
-			   text : '正在加载数据',
-			   maskColor:'#030D17',
-			   textColor:'white'
-			}); 
 			
 			window.onresize =()=> {
 			    this.chart.resize();
@@ -72,6 +66,15 @@
 		methods: {
 			getChart(data1,data2) {
 				let that = this
+				this.option = {}
+				
+				this.chart = this.$echarts.init(document.getElementById("map"))
+				this.chart.showLoading({
+				   text : '正在加载数据',
+				   maskColor:'#030D17',
+				   textColor:'white'
+				}); 
+				
 				let max = 6000,
 					min = 10,
 				    maxSize4Pin = 100,
@@ -141,6 +144,7 @@
 						geoIndex: 0,
 						aspectScale: 0.75,
 						roam: true,
+						zoom:that.zoom,
 						label: {
 							normal: {
 								show: false,
@@ -209,6 +213,7 @@
 						showEffectOn: 'render',
 					}]
 				};
+				console.info('this.option',this.option)
 				this.chart.setOption(this.option, true)
 				this.chart.hideLoading();
 				
@@ -243,7 +248,7 @@
 							}
 							this.zoom = 0.6
 							this.center = null
-							
+							this.chart.dispose()
 							this.getChart(data,this.convertData(data))
 							this.event()
 						}else{
@@ -257,11 +262,11 @@
 							}else if(this.dataIndex === 2){
 								data = this.remouldData
 							}
-							
+							this.chart.dispose()
 							this.getChart(data,this.convertData(data))
 							this.areaIndex += 1
 						}
-					},5000)
+					},2000)
 				},0)
 			},
 			getData(){

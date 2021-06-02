@@ -48,9 +48,9 @@
 			}
 		},
 		mounted() {
-			setInterval(()=>{
-				this.type = this.type === 'odd' ? 'even' : 'odd'
-			},3000)
+			// setInterval(()=>{
+			// 	this.type = this.type === 'odd' ? 'even' : 'odd'
+			// },3000)
 		},
 	}
 </script>

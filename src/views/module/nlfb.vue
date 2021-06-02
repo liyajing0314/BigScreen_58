@@ -19,13 +19,6 @@
 		props:['data','randomData','index'],
 		mounted () {
 			let that = this
-			this.chart = this.$echarts.init(document.getElementById('nlfb'))
-			this.chart.showLoading({
-			   text : '正在加载数据',
-			   maskColor:'#030D17',
-			   textColor:'white'
-			}); 
-			
 			window.addEventListener("resize", function () {
 				that.chart.resize()
 			});
@@ -43,6 +36,13 @@
 		methods:{
 			getChart(){
 				let that = this
+				this.chart = this.$echarts.init(document.getElementById('nlfb'))
+				this.chart.showLoading({
+				   text : '正在加载数据',
+				   maskColor:'#030D17',
+				   textColor:'white'
+				}); 
+				
 				let opData = []
 				this.data.forEach(item=>{
 					opData.push({
@@ -84,12 +84,12 @@
 								}
 							},
 							labelLine: {
-								length: 25,
+								length: 20,
 								length2: 0,
 								maxSurfaceAngle: 80
 							},
 							labelLayout: function (params) {
-								var isLeft = params.labelRect.x < 240 / 2;
+								var isLeft = params.labelRect.x < 520 / 2;
 								var points = params.labelLinePoints;
 								// Update the end point.
 								points[2][0] = isLeft
@@ -128,10 +128,6 @@
 					seriesIndex: 0,
 					dataIndex: 0
 				});
-				
-				window.onresize =()=> {
-				    this.chart.resize();
-				}
 			}
 		}
 	}
