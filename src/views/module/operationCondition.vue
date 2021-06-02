@@ -1,6 +1,6 @@
 <!-- 作业情况 -->
 <template>
-	<pannel-head :title="title" :randomData="randomData" :index="index">
+	<pannel-head :title="title" :randomData="randomData" :index="index" class="con-mar-top">
 		<div class="op-container">
 			<div class="bg-box">
 				<div class="labels">

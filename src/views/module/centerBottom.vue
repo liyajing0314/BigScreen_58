@@ -72,11 +72,15 @@
 	.center-bottom {
 		display: flex;
 		flex-wrap: wrap;
+		position: absolute;
+		width:100%;
+		// bottom:-6px;
+		bottom:0;
 		.bottom-item {
 			width:268px;
 			height: 90px;
 			background: url('~@/assets/images/box7.png') no-repeat center center / 100% 100%;
-			margin-bottom: 8px;
+			margin-top: 8px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;

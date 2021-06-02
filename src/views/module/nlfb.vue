@@ -6,6 +6,7 @@
 </template>
 
 <script>
+	import {fontSize} from '@/utils/rem.js'
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
@@ -64,21 +65,21 @@
 								shadowOffsetX: 0,
 								shadowColor: 'rgba(0, 0, 0, 0.5)',
 								borderColor:'rgba(255, 255, 255, 0.3)',
-								borderWidth:1
+								borderWidth:fontSize(1)
 							},
 							label: {
 								alignTo: 'edge',
 								formatter: '{percentage|{c}%}    {name|{b}}\n',
-								minMargin: 5,
+								minMargin:fontSize(5),
 								edgeDistance: 10,
-								lineHeight: 15,
+								lineHeight: fontSize(15),
 								rich: {
 									percentage: {
-										fontSize: 10,
+										fontSize: fontSize(12),
 										color: '#ffffff'
 									},
 									name: {
-										fontSize: 10,
+										fontSize: fontSize(12),
 										color: '#C4E2FB'
 									}
 								}

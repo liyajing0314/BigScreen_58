@@ -56,9 +56,6 @@
 </script>
 
 <style scoped lang="scss">
-	.zp-container {
-		margin-bottom: 26px;
-	}
 	.bg-box {
 		height:35px;
 		display: flex;

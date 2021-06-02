@@ -21,6 +21,6 @@ export function fontSize(res){
 	let docEl = document.getElement,
 		clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clienWidth;
 	if(!clientWidth) return;
-	let fontSize = 100 * (clientWidth / 1920)
+	let fontSize = 1 * (clientWidth / 1920)
 	return res * fontSize
 }
