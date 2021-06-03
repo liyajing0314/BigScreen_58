@@ -153,7 +153,8 @@
 	}
 
 	.shadow {
-		background: radial-gradient(circle at 100%, rgba(3, 13, 23, 0.8), rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.8) 75%, rgba(3, 13, 23, 0.8) 100%);
+		// background: radial-gradient(circle at 100%, rgba(3, 13, 23, 0.8), rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.8) 75%, rgba(3, 13, 23, 0.8) 100%);
+		background: radial-gradient(circle,rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.6) 75%, rgba(3, 13, 23, 0.8) 100%);
 		position: absolute;
 		width: 100%;
 		height: 100%;

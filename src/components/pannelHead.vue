@@ -53,6 +53,7 @@
 <style scoped lang="scss">
 	.pannel {
 		margin-top: 20px;
+		margin-bottom:8px;
 		.pannel-head {
 			color: #7FCCFF;
 			font-size: 16px;

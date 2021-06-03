@@ -80,7 +80,7 @@
 			width:268px;
 			height: 90px;
 			background: url('~@/assets/images/box7.png') no-repeat center center / 100% 100%;
-			margin-top: 8px;
+			margin-bottom: 8px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
