@@ -72,10 +72,10 @@
 	.center-bottom {
 		display: flex;
 		flex-wrap: wrap;
-		position: absolute;
+		// position: absolute;
 		width:100%;
 		// bottom:-6px;
-		bottom:0;
+		// bottom:0;
 		.bottom-item {
 			width:268px;
 			height: 90px;

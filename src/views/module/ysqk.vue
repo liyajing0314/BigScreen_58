@@ -117,6 +117,7 @@
 			font-size: 14px;
 			border-right: 1px solid rgba(67, 241, 197, 0.1);
 			text-align: center;
+			line-height: 1.2;
 		}
 		.counts {
 			flex: 2;

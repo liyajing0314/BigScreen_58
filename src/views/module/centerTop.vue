@@ -78,7 +78,7 @@
 	.center-top {
 		background-color: rgba(255,255,255,0.02);
 		height:80px;
-		padding:12px;
+		padding:12px 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -97,8 +97,7 @@
 		}
 		.nums {
 			font-size: 24px;
-			margin-bottom: 18px;
-			margin-top: 8px;
+			margin-bottom: 10px;
 		}
 		.labels {
 			color:#C4E2FB;

@@ -70,6 +70,9 @@
 		text-align: center;
 		background: url('~@/assets/images/box.png') no-repeat center center / 100% 100%;
 	}
+	.item-box:nth-child(2) {
+		margin: 0 8px;
+	}
 	.item-top {
 		height:63px;
 		line-height: 63px;

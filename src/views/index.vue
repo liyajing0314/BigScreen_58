@@ -2,7 +2,7 @@
 	<div class="container supervise_bg">
 		<div style="position: absolute;z-index: 3;width:100%;height: 100%;">
 			<div class="head">
-				<div class="head-title">58企服服务数据看板</div>
+				<div class="head-title" @click="toFull">58企服服务数据看板</div>
 			</div>
 			<div class="content">
 				<div class="con-left">
@@ -75,7 +75,8 @@
 				cityCoversCondition: [],
 				randomData: [],
 				loading:false,
-				mapTitle:"各省项目数"
+				mapTitle:"各省项目数",
+				isFull:false,
 			}
 		},
 		mounted() {
@@ -86,6 +87,7 @@
 				this.randomNum()
 			}, 2000)
 			this.getData()
+			console.info(document.fullScreen)
 		},
 		methods: {
 			getData() {
@@ -121,15 +123,45 @@
 				}
 			},
 			changeTitle(title){
-				console.info('title',title)
 				this.mapTitle = title
-			}
+			},
+			toFull() { //点击切换全屏
+				this.isFull = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+				if(this.isFull){
+					let el = document;
+					let cfs = el.cancelFullScreen || el.webkitCancelFullScreen ||
+						el.mozCancelFullScreen || el.exitFullScreen;
+					if (cfs) { //typeof cfs != "undefined" && cfs
+						cfs.call(el);
+					} else if (typeof window.ActiveXObject != "undefined") {
+						//for IE，这里和fullScreen相同，模拟按下F11键退出全屏
+						let wscript = new ActiveXObject("WScript.Shell");
+						if (wscript != null) {
+							wscript.SendKeys("{F11}");
+						}
+					}
+				}else{
+					let el = document.documentElement;
+					let rfs = el.requestFullScreen || el.webkitRequestFullScreen ||
+						el.mozRequestFullScreen || el.msRequestFullScreen;
+					if (rfs) { //typeof rfs != "undefined" && rfs
+						rfs.call(el);
+					} else if (typeof window.ActiveXObject != "undefined") {
+						//for IE，这里其实就是模拟了按下键盘的F11，使浏览器全屏
+						let wscript = new ActiveXObject("WScript.Shell");
+						if (wscript != null) {
+							wscript.SendKeys("{F11}");
+						}
+					}
+				}
+			},
 		},
 	}
 </script>
 <style scoped lang="scss">
 	.mapContainer {
-		height: 600px;
+		// height: 600px;
+		height: calc(100% - 80px - 38px - 22px - 196px );
 		margin-bottom: 20px;
 		position: relative;
 
@@ -154,7 +186,7 @@
 
 	.shadow {
 		// background: radial-gradient(circle at 100%, rgba(3, 13, 23, 0.8), rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.8) 75%, rgba(3, 13, 23, 0.8) 100%);
-		background: radial-gradient(rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.6) 75%, rgba(3, 13, 23, 0.8) 100%);
+		background: radial-gradient(rgba(3, 13, 23, 0) 40%, rgba(3, 13, 23, 0.6) 50%, rgba(3, 13, 23, 0.8) 70%);
 		position: absolute;
 		width: 100%;
 		height: 100%;
