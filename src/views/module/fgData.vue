@@ -1,6 +1,6 @@
 <!-- 覆盖数据 -->
 <template>
-	<pannel-head :title="title" :randomData="randomData" :index="index">
+	<pannel-head :title="title" :randomData="randomData" :index="index" class="con-mar-top">
 		<div class="bg-box">
 			<div class="item-box">
 				<div class="item-top">
@@ -16,7 +16,7 @@
 				<div class="item-top">
 					<countTo
 					  :start-val="0"
-					  :end-val="data.saasEnterpriseNum"
+					  :end-val="data.saasEnterpriseNum || 0"
 					  separator=","
 					/>
 				</div>
@@ -26,7 +26,7 @@
 				<div class="item-top">
 					<countTo
 					  :start-val="0"
-					  :end-val="data.saasWorkerNum"
+					  :end-val="data.saasWorkerNum || 0"
 					  separator=","
 					/>
 				</div>

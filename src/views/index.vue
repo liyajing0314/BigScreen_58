@@ -1,6 +1,6 @@
 <template>
 	<div class="container supervise_bg">
-		<div style="position: absolute;z-index: 3;">
+		<div style="position: absolute;z-index: 3;width:100%;height: 100%;">
 			<div class="head">
 				<div class="head-title">58企服服务数据看板</div>
 			</div>
@@ -17,7 +17,7 @@
 					<div class="mapContainer">
 						<div class="head">
 							<img src="~@/assets/images/line.png" class="line" />
-							<div>全国项目分布</div>
+							<div>{{mapTitle}}</div>
 						</div>
 					</div>
 					<center-bottom :data="dataNum" v-if="dataNum"></center-bottom>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div class="shadow"></div>
-		<map-components :data="cityCoversCondition"></map-components>
+		<map-components :data="cityCoversCondition" @changeTitle="changeTitle"></map-components>
 		<div class="mask load8" v-if="loading">
 			<div class="loader">加载中...</div>
 		</div>
@@ -74,7 +74,8 @@
 				xbData: [],
 				cityCoversCondition: [],
 				randomData: [],
-				loading:false
+				loading:false,
+				mapTitle:"各省项目数"
 			}
 		},
 		mounted() {
@@ -118,6 +119,10 @@
 						add++;
 					}
 				}
+			},
+			changeTitle(title){
+				console.info('title',title)
+				this.mapTitle = title
 			}
 		},
 	}
@@ -148,7 +153,7 @@
 	}
 
 	.shadow {
-		background: radial-gradient(circle at 100%, #030E17, rgba(3, 13, 23, 0) 50%, #030E17 75%, #030E17 100%);
+		background: radial-gradient(circle at 100%, rgba(3, 13, 23, 0.8), rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.8) 75%, rgba(3, 13, 23, 0.8) 100%);
 		position: absolute;
 		width: 100%;
 		height: 100%;
@@ -167,7 +172,7 @@
 	.loader {
 		margin: -100px auto 0;
 		top:50%;
-		font-size: 10px;
+		font-size: 14px;
 		position: relative;
 		text-indent: -9999em;
 		border-top: 14px solid rgba(255, 255, 255, 0.2);

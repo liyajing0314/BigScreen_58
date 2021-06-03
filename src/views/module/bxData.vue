@@ -74,7 +74,6 @@
 	.bx-container {
 		display: flex;
 		flex-wrap: wrap;
-		margin-bottom: 32px;
 	}
 	.bg-box {
 		width:236px;

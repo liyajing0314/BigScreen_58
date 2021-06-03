@@ -10,13 +10,12 @@
 </template>
 
 <script>
-	import {fontSize} from '@/utils/rem.js'
 	import mapJsonConfig from '@/utils/map.json'
 	export default {
 		data() {
 			return {
 				geoCoordMap: {}, //地图数据 
-				option:{},
+				option:null,
 				chart:null,
 				areaList:[
 					[125.45, 47.31],//东北地区
@@ -33,7 +32,7 @@
 				synthesizeData:[], //综合指数
 				taskData:[],//任务数
 				remouldData:[],//改造数
-				zoom:0.6, //0.6
+				zoom:0.6,
 				center:null,
 			}
 		},
@@ -49,7 +48,6 @@
 			});
 			
 			this.$echarts.registerMap('china', mapJsonConfig)
-			
 			this.chart = this.$echarts.init(document.getElementById("map"))
 			this.chart.showLoading({
 			   text : '正在加载数据',
@@ -74,8 +72,6 @@
 		methods: {
 			getChart(data1,data2) {
 				let that = this
-				this.option = {}
-				
 				let max = 6000,
 					min = 10,
 				    maxSize4Pin = 100,
@@ -145,7 +141,6 @@
 						geoIndex: 0,
 						aspectScale: 0.75,
 						roam: true,
-						zoom:that.zoom,
 						label: {
 							normal: {
 								show: false,
@@ -195,7 +190,7 @@
 								},
 								rich: {
 									cnNum: {
-										fontSize: fontSize(14),
+										fontSize: 13,
 										color: '#D4EEFF',
 									}
 								}
@@ -208,14 +203,13 @@
 							}
 							var a = (maxSize4Pin - minSize4Pin) / (max - min);
 							var b = maxSize4Pin - a * max;
-							let count = a * val[2] + b * 1.2
-							return fontSize(count) ;
+							return a * val[2] + b * 1.2;
 						},
 						data: data2,
 						showEffectOn: 'render',
 					}]
 				};
-				this.chart.setOption(this.option)
+				this.chart.setOption(this.option, true)
 				this.chart.hideLoading();
 				
 			},
@@ -240,20 +234,16 @@
 							}
 							
 							let data = []
-							let title="各省项目数"
 							if(this.dataIndex === 0){
-								title="各省项目数"
 								data = this.synthesizeData
 							}else if(this.dataIndex === 1){
-								title="各省任务数"
 								data = this.taskData
 							}else if(this.dataIndex === 2){
-								title="各省改造数"
 								data = this.remouldData
 							}
-							this.$emit('changeTitle',title)
 							this.zoom = 0.6
 							this.center = null
+							
 							this.getChart(data,this.convertData(data))
 							this.event()
 						}else{
@@ -267,6 +257,7 @@
 							}else if(this.dataIndex === 2){
 								data = this.remouldData
 							}
+							
 							this.getChart(data,this.convertData(data))
 							this.areaIndex += 1
 						}
@@ -345,6 +336,8 @@
 		position: absolute !important;
 		width:100%;
 		height:100%;
+		left: 0;
+		top:0;
 		z-index: 1;
 		opacity: 0.8;
 	}
