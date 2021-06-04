@@ -21,9 +21,10 @@
 		mounted () {
 			let that = this
 			window.addEventListener("resize", function () {
-				that.chart.resize()
+				setTimeout(()=>{
+					that.chart.resize()
+				},100)
 			});
-			
 			this.getChart();
 		},
 		watch: {
@@ -46,19 +47,20 @@
 				
 				let opData = []
 				this.data.forEach(item=>{
-					opData.push({
+					opData.unshift({
 						value:item.num,
 						name:item.typeName
 					})
 				})
 				
 				this.options = {
-					color:['rgba(131, 100, 241, 0.6)',' rgba(213, 133, 80, 0.6)','rgba(255, 180, 54, 0.6)','rgba(54, 156, 255, 0.6)','rgba(164, 68, 68, 0.6)','rgba(128, 180, 62, 0.6)','rgba(100, 241, 216, 0.6)'],
-				    series: [
+					// color:['rgba(131, 100, 241, 0.6)',' rgba(213, 133, 80, 0.6)','rgba(255, 180, 54, 0.6)','rgba(54, 156, 255, 0.6)','rgba(164, 68, 68, 0.6)','rgba(128, 180, 62, 0.6)','rgba(100, 241, 216, 0.6)'],
+				   color:['rgba(131, 100, 241, 0.9)','rgba(255, 154, 89, 0.9)','rgba(255, 184, 64, 0.9)','rgba(54, 156, 255, 0.9)','rgba(255, 113, 113, 0.9)','rgba(128, 180, 62, 0.9)','rgba(100, 241, 216, 0.9)'],
+					series: [
 				        {
 				            name: '年龄分布',
 				            type: 'pie',
-				            radius: ['30%', '80%'],
+				            radius: ['30%', '70%'],
 				            data:opData,
 							itemStyle: {
 								shadowBlur: 10,
@@ -69,17 +71,18 @@
 							},
 							label: {
 								alignTo: 'edge',
-								formatter: '{percentage|{c}%}    {name|{b}}\n',
+								formatter: '{percentage|{d}%}    {name|{b}}\n',
 								minMargin:fontSize(5),
 								edgeDistance: 10,
 								lineHeight: fontSize(15),
 								rich: {
 									percentage: {
-										fontSize: fontSize(12),
-										color: '#ffffff'
+										fontSize: fontSize(14),
+										color: '#ffffff',
+										fontWeight:'bold'
 									},
 									name: {
-										fontSize: fontSize(12),
+										fontSize: fontSize(14),
 										color: '#C4E2FB'
 									}
 								}
@@ -137,6 +140,7 @@
 <style scoped lang="scss">
 	.charts {
 		height:260px;
+		width:100%;
 	}
 </style>
 

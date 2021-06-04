@@ -52,7 +52,7 @@
 
 <style scoped lang="scss">
 	.pannel {
-		margin-top: 12px;
+		margin-top: 22px;
 		.pannel-head {
 			color: #7FCCFF;
 			font-size: 16px;
@@ -79,7 +79,8 @@
 
 		.pannel-content {
 			min-height: 50px;
-			margin-bottom:8px;
+			width:100%;
+			// margin-bottom:8px;
 		}
 	}
 

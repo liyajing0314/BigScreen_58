@@ -78,6 +78,7 @@
 	.center-top {
 		background-color: rgba(255,255,255,0.02);
 		height:80px;
+		width:100%;
 		padding:12px 20px;
 		display: flex;
 		justify-content: space-between;

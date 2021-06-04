@@ -5,19 +5,19 @@
 				<div class="head-title" @click="toFull">58企服服务数据看板</div>
 			</div>
 			<div class="content">
-				<div class="con-left">
+				<div class="con-left" ref="con_left">
 					<fg-data :data="dataNum" :randomData="randomData" :index="1" v-if="dataNum"></fg-data>
 					<zp-data :data="dataNum" :randomData="randomData" :index="2" v-if="dataNum"></zp-data>
 					<bx-data :data="dataNum" :randomData="randomData" :index="3" v-if="dataNum"></bx-data>
 					<fx-data :data="dataNum" :randomData="randomData" :index="4" v-if="dataNum"></fx-data>
 				</div>
-				<div class="con-center">
+				<div class="con-center" ref="con_center">
 					<center-top :data="dataNum" v-if="dataNum"></center-top>
 					<!-- <map-components :data="cityCoversCondition"></map-components> -->
 					<div class="mapContainer">
 						<div class="head">
 							<img src="~@/assets/images/line.png" class="line" />
-							<div>{{mapTitle}}</div>
+							<div class="map-title">{{mapTitle}}</div>
 						</div>
 					</div>
 					<center-bottom :data="dataNum" v-if="dataNum"></center-bottom>
@@ -87,7 +87,6 @@
 				this.randomNum()
 			}, 2000)
 			this.getData()
-			console.info(document.fullScreen)
 		},
 		methods: {
 			getData() {
@@ -160,17 +159,16 @@
 </script>
 <style scoped lang="scss">
 	.mapContainer {
-		// height: 600px;
-		height: calc(100% - 80px - 38px - 22px - 196px );
+		height: 600px;
+		min-height: 600px;
 		margin-bottom: 20px;
 		position: relative;
-
 		.head {
 			position: absolute;
 			left: 0;
 			right: 0;
 			margin: 0 auto;
-			top: 40px;
+			top: 20px;
 			z-index: 10;
 			text-align: center;
 			font-size: 28px;
@@ -179,14 +177,17 @@
 
 			.line {
 				width: 184px;
-				margin-bottom: 25px;
+				margin-bottom: 6px;
+			}
+			.map-title {
+				text-shadow: 0px 3px 24px rgba(2, 14, 30, 0.5);
 			}
 		}
 	}
 
 	.shadow {
 		// background: radial-gradient(circle at 100%, rgba(3, 13, 23, 0.8), rgba(3, 13, 23, 0) 50%, rgba(3, 13, 23, 0.8) 75%, rgba(3, 13, 23, 0.8) 100%);
-		background: radial-gradient(rgba(3, 13, 23, 0) 40%, rgba(3, 13, 23, 0.6) 50%, rgba(3, 13, 23, 0.8) 70%);
+		background: radial-gradient(rgba(3,13,23,0) 35%,rgba(3,13,23,.6) 50%,rgba(3,13,23,.9) 90%);
 		position: absolute;
 		width: 100%;
 		height: 100%;
