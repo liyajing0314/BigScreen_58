@@ -7,7 +7,7 @@
 					近30天任务数
 				</div>
 				<div class="count">
-					{{data.totalTaskNum}}
+					{{toThousands(data.totalTaskNum)}}
 				</div>
 			</div>
 			<div class="complete-box">
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+	import {toThousands} from '@/utils/index'
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
@@ -58,6 +59,7 @@
 		data(){
 			return {
 				title:'作业情况(近30天)',
+				toThousands:toThousands
 			}
 		},
 		methods:{

@@ -44,10 +44,10 @@
 					<span class="num">
 						<countTo
 						  :start-val="0"
-						  :end-val="Number(data.insuranceAverageCoverage || 0)"
+						  :end-val="Number(data.insuranceAverageCoverage/10 || 0)"
 						  separator=","
 						/>
-					</span>元/人年
+					</span>万元/人年
 				</div>
 			</div>
 		</div>

@@ -12,10 +12,10 @@
 			}
 		},
 		mounted(){
-			refreshScale();
-			window.onresize=function(){
-			  refreshScale()
-			}
+			// refreshScale();
+			// window.onresize=function(){
+			//   refreshScale()
+			// }
 		}
 	}
 </script>
@@ -25,7 +25,7 @@ body {
 }
 #app {
 	position: relative;
-	left:50%;
+	// left:50%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

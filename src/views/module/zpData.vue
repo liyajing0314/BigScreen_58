@@ -6,37 +6,38 @@
 				<div class="labels">
 					城市合作伙伴数
 				</div>
-				<div class="count">{{data.cityPartnerNum}}</div>
+				<div class="count">{{toThousands(data.cityPartnerNum)}}</div>
 			</div>
 			<div class="bg-box" :class="{'evenBox':type === 'odd','oddBox':type === 'even'}">
 				<div class="labels">
 					代理商数
 				</div>
-				<div class="count">{{data.agentNum}}</div>
+				<div class="count">{{toThousands(data.agentNum)}}</div>
 			</div>
 			<div class="bg-box" :class="{'oddBox':type === 'odd','evenBox':type === 'even'}">
 				<div class="labels">
 					企业数
 				</div>
-				<div class="count">{{data.enterpriseNum}}</div>
+				<div class="count">{{toThousands(data.enterpriseNum)}}</div>
 			</div>
 			<div class="bg-box" :class="{'evenBox':type === 'odd','oddBox':type === 'even'}">
 				<div class="labels">
 					猎头数
 				</div>
-				<div class="count">{{data.headhuntingNum}}</div>
+				<div class="count">{{toThousands(data.headhuntingNum)}}</div>
 			</div>
 			<div class="bg-box" :class="{'oddBox':type === 'odd','evenBox':type === 'even'}">
 				<div class="labels">
 					岗位数
 				</div>
-				<div class="count">{{data.postNum}}</div>
+				<div class="count">{{toThousands(data.postNum)}}</div>
 			</div>
 		</div>
 	</pannel-head>
 </template>
 
 <script>
+	import {toThousands} from '@/utils/index'
 	import PannelHead from '@/components/pannelHead'
 	export default {
 		components:{PannelHead},
@@ -44,7 +45,8 @@
 		data(){
 			return {
 				title:'招聘数据',
-				type:"odd"
+				type:"odd",
+				toThousands:toThousands
 			}
 		},
 		mounted() {
