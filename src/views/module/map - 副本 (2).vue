@@ -10,6 +10,8 @@
 </template>
 
 <script>
+	import {toThousands} from '@/utils/index'
+	import {fontSize} from '@/utils/rem.js'
 	import mapJsonConfig from '@/utils/map.json'
 	export default {
 		data() {
@@ -32,7 +34,10 @@
 				synthesizeData:[], //综合指数
 				taskData:[],//任务数
 				remouldData:[],//改造数
-				zoom:0.6,
+				synthesizeMax:6000,
+				taskMax:6000,
+				remouldMax:6000,
+				zoom:0.6, //0.6
 				center:null,
 			}
 		},
@@ -49,6 +54,13 @@
 			
 			this.$echarts.registerMap('china', mapJsonConfig)
 			
+			this.chart = this.$echarts.init(document.getElementById("map"))
+			this.chart.showLoading({
+			   text : '正在加载数据',
+			   maskColor:'#030D17',
+			   textColor:'white'
+			}); 
+			
 			window.onresize =()=> {
 			    this.chart.resize();
 			}
@@ -64,18 +76,10 @@
 			}
 		},
 		methods: {
-			getChart(data1,data2) {
+			getChart(data1,data2,maxData) {
 				let that = this
 				this.option = {}
-				
-				this.chart = this.$echarts.init(document.getElementById("map"))
-				this.chart.showLoading({
-				   text : '正在加载数据',
-				   maskColor:'#030D17',
-				   textColor:'white'
-				}); 
-				
-				let max = 6000,
+				let max = maxData + 10000 || 6000000,
 					min = 10,
 				    maxSize4Pin = 100,
 					minSize4Pin = 20;
@@ -190,11 +194,11 @@
 								fontWeight: 'bold',
 								position: 'inside',
 								formatter: function(para) {
-									return '{cnNum|' + para.data.value[2] + '}'
+									return '{cnNum|' + toThousands(para.data.value[2]) + '}'
 								},
 								rich: {
 									cnNum: {
-										fontSize: 13,
+										fontSize: fontSize(14),
 										color: '#D4EEFF',
 									}
 								}
@@ -207,14 +211,14 @@
 							}
 							var a = (maxSize4Pin - minSize4Pin) / (max - min);
 							var b = maxSize4Pin - a * max;
-							return a * val[2] + b * 1.2;
+							let count = a * val[2] + b * 1.2
+							return fontSize(count) ;
 						},
 						data: data2,
 						showEffectOn: 'render',
 					}]
 				};
-				console.info('this.option',this.option)
-				this.chart.setOption(this.option, true)
+				this.chart.setOption(this.option)
 				this.chart.hideLoading();
 				
 			},
@@ -232,49 +236,52 @@
 				setTimeout(()=>{
 					this.interval = setInterval(()=>{
 						if(this.areaIndex === this.areaList.length){
-							if(this.dataIndex === 2){
+							if(this.dataIndex === 1){
 								this.dataIndex = 0
 							}else{
 								this.dataIndex += 1
 							}
 							
-							let data = []
+							let data = [],max = 6000
+							let title="各省任务数"
 							if(this.dataIndex === 0){
-								data = this.synthesizeData
-							}else if(this.dataIndex === 1){
+								title="各省任务数"
 								data = this.taskData
-							}else if(this.dataIndex === 2){
+								max = this.taskMax
+							}else if(this.dataIndex === 1){
+								title="各省项目数"
 								data = this.remouldData
+								max = this.remouldMax
 							}
+							this.$emit('changeTitle',title)
 							this.zoom = 0.6
 							this.center = null
-							this.chart.dispose()
-							this.getChart(data,this.convertData(data))
+							this.getChart(data,this.convertData(data),max)
 							this.event()
 						}else{
 							this.zoom = 1.8
 							this.center = this.areaList[this.areaIndex]
-							let data = []
+							let data = [],max = 6000
+							
 							if(this.dataIndex === 0){
-								data = this.synthesizeData
-							}else if(this.dataIndex === 1){
 								data = this.taskData
-							}else if(this.dataIndex === 2){
+								max = this.taskMax
+							}else if(this.dataIndex === 1){
 								data = this.remouldData
+								max = this.remouldMax
 							}
-							this.chart.dispose()
-							this.getChart(data,this.convertData(data))
+							this.getChart(data,this.convertData(data),max)
 							this.areaIndex += 1
 						}
-					},2000)
+					},5000)
 				},0)
 			},
 			getData(){
 				this.data.forEach((item) => {
-					this.synthesizeData.push({
-						name: item.provinceName,
-						value: item.synthesizeNum
-					})
+					// this.synthesizeData.push({
+					// 	name: item.provinceName,
+					// 	value: item.synthesizeNum
+					// })
 					this.taskData.push({
 						name: item.provinceName,
 						value: item.taskNum
@@ -284,8 +291,11 @@
 						value: item.remouldNum
 					})
 				})
+				// this.synthesizeMax = Math.max.apply(null, this.synthesizeData.map(function (o) {return o.value}))
+				this.taskMax =  Math.max.apply(null, this.taskData.map(function (o) {return o.value}))
+				this.remouldMax = Math.max.apply(null, this.remouldData.map(function (o) {return o.value}))
 				
-				this.getChart(this.synthesizeData,this.convertData(this.synthesizeData))
+				this.getChart(this.taskData,this.convertData(this.taskData),this.taskMax)
 				setTimeout(()=>{
 					this.event()
 				},5000)
@@ -340,9 +350,8 @@
 	.mapChart {
 		position: absolute !important;
 		width:100%;
-		height:100%;
-		left: 0;
-		top:0;
+		// height:100%;
+		height:100vh;
 		z-index: 1;
 		opacity: 0.8;
 	}

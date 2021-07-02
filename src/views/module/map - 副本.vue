@@ -10,12 +10,14 @@
 </template>
 
 <script>
+	import {toThousands} from '@/utils/index'
+	import {fontSize} from '@/utils/rem.js'
 	import mapJsonConfig from '@/utils/map.json'
 	export default {
 		data() {
 			return {
 				geoCoordMap: {}, //地图数据 
-				option:null,
+				option:{},
 				chart:null,
 				areaList:[
 					[125.45, 47.31],//东北地区
@@ -32,7 +34,10 @@
 				synthesizeData:[], //综合指数
 				taskData:[],//任务数
 				remouldData:[],//改造数
-				zoom:0.6,
+				synthesizeMax:6000,
+				taskMax:6000,
+				remouldMax:6000,
+				zoom:0.6, //0.6
 				center:null,
 			}
 		},
@@ -48,6 +53,7 @@
 			});
 			
 			this.$echarts.registerMap('china', mapJsonConfig)
+			
 			this.chart = this.$echarts.init(document.getElementById("map"))
 			this.chart.showLoading({
 			   text : '正在加载数据',
@@ -70,9 +76,10 @@
 			}
 		},
 		methods: {
-			getChart(data1,data2) {
+			getChart(data1,data2,maxData) {
 				let that = this
-				let max = 6000,
+				this.option = {}
+				let max = maxData + 10000 || 6000000,
 					min = 10,
 				    maxSize4Pin = 100,
 					minSize4Pin = 20;
@@ -141,6 +148,7 @@
 						geoIndex: 0,
 						aspectScale: 0.75,
 						roam: true,
+						zoom:that.zoom,
 						label: {
 							normal: {
 								show: false,
@@ -186,11 +194,11 @@
 								fontWeight: 'bold',
 								position: 'inside',
 								formatter: function(para) {
-									return '{cnNum|' + para.data.value[2] + '}'
+									return '{cnNum|' + toThousands(para.data.value[2]) + '}'
 								},
 								rich: {
 									cnNum: {
-										fontSize: 13,
+										fontSize: fontSize(14),
 										color: '#D4EEFF',
 									}
 								}
@@ -203,13 +211,14 @@
 							}
 							var a = (maxSize4Pin - minSize4Pin) / (max - min);
 							var b = maxSize4Pin - a * max;
-							return a * val[2] + b * 1.2;
+							let count = a * val[2] + b * 1.2
+							return fontSize(count) ;
 						},
 						data: data2,
 						showEffectOn: 'render',
 					}]
 				};
-				this.chart.setOption(this.option, true)
+				this.chart.setOption(this.option)
 				this.chart.hideLoading();
 				
 			},
@@ -233,32 +242,42 @@
 								this.dataIndex += 1
 							}
 							
-							let data = []
+							let data = [],max = 6000
+							let title="各省项目数"
 							if(this.dataIndex === 0){
+								title="各省项目数"
 								data = this.synthesizeData
+								max = this.synthesizeMax
 							}else if(this.dataIndex === 1){
+								title="各省任务数"
 								data = this.taskData
+								max = this.taskMax
 							}else if(this.dataIndex === 2){
+								title="各省改造数"
 								data = this.remouldData
+								max = this.remouldMax
 							}
+							this.$emit('changeTitle',title)
 							this.zoom = 0.6
 							this.center = null
-							
-							this.getChart(data,this.convertData(data))
+							this.getChart(data,this.convertData(data),max)
 							this.event()
 						}else{
 							this.zoom = 1.8
 							this.center = this.areaList[this.areaIndex]
-							let data = []
+							let data = [],max = 6000
+							
 							if(this.dataIndex === 0){
 								data = this.synthesizeData
+								max = this.synthesizeMax
 							}else if(this.dataIndex === 1){
 								data = this.taskData
+								max = this.taskMax
 							}else if(this.dataIndex === 2){
 								data = this.remouldData
+								max = this.remouldMax
 							}
-							
-							this.getChart(data,this.convertData(data))
+							this.getChart(data,this.convertData(data),max)
 							this.areaIndex += 1
 						}
 					},5000)
@@ -279,8 +298,11 @@
 						value: item.remouldNum
 					})
 				})
+				this.synthesizeMax = Math.max.apply(null, this.synthesizeData.map(function (o) {return o.value}))
+				this.taskMax =  Math.max.apply(null, this.taskData.map(function (o) {return o.value}))
+				this.remouldMax = Math.max.apply(null, this.remouldData.map(function (o) {return o.value}))
 				
-				this.getChart(this.synthesizeData,this.convertData(this.synthesizeData))
+				this.getChart(this.synthesizeData,this.convertData(this.synthesizeData),this.synthesizeMax)
 				setTimeout(()=>{
 					this.event()
 				},5000)
@@ -335,9 +357,8 @@
 	.mapChart {
 		position: absolute !important;
 		width:100%;
-		height:100%;
-		left: 0;
-		top:0;
+		// height:100%;
+		height:100vh;
 		z-index: 1;
 		opacity: 0.8;
 	}

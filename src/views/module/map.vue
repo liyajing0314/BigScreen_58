@@ -79,7 +79,7 @@
 			getChart(data1,data2,maxData) {
 				let that = this
 				this.option = {}
-				let max = maxData + 10000 || 6000000,
+				let max = maxData + 100 || 6000000,
 					min = 10,
 				    maxSize4Pin = 100,
 					minSize4Pin = 20;
@@ -236,28 +236,17 @@
 				setTimeout(()=>{
 					this.interval = setInterval(()=>{
 						if(this.areaIndex === this.areaList.length){
-							if(this.dataIndex === 2){
-								this.dataIndex = 0
-							}else{
-								this.dataIndex += 1
-							}
+							// if(this.dataIndex === 1){
+							// 	this.dataIndex = 0
+							// }else{
+							// 	this.dataIndex += 1
+							// }
 							
 							let data = [],max = 6000
 							let title="各省项目数"
-							if(this.dataIndex === 0){
-								title="各省项目数"
-								data = this.synthesizeData
-								max = this.synthesizeMax
-							}else if(this.dataIndex === 1){
-								title="各省任务数"
-								data = this.taskData
-								max = this.taskMax
-							}else if(this.dataIndex === 2){
-								title="各省改造数"
 								data = this.remouldData
 								max = this.remouldMax
-							}
-							this.$emit('changeTitle',title)
+							// this.$emit('changeTitle',title)
 							this.zoom = 0.6
 							this.center = null
 							this.getChart(data,this.convertData(data),max)
@@ -267,16 +256,8 @@
 							this.center = this.areaList[this.areaIndex]
 							let data = [],max = 6000
 							
-							if(this.dataIndex === 0){
-								data = this.synthesizeData
-								max = this.synthesizeMax
-							}else if(this.dataIndex === 1){
-								data = this.taskData
-								max = this.taskMax
-							}else if(this.dataIndex === 2){
-								data = this.remouldData
-								max = this.remouldMax
-							}
+							data = this.remouldData
+							max = this.remouldMax
 							this.getChart(data,this.convertData(data),max)
 							this.areaIndex += 1
 						}
@@ -285,24 +266,24 @@
 			},
 			getData(){
 				this.data.forEach((item) => {
-					this.synthesizeData.push({
-						name: item.provinceName,
-						value: item.synthesizeNum
-					})
-					this.taskData.push({
-						name: item.provinceName,
-						value: item.taskNum
-					})
+					// this.synthesizeData.push({
+					// 	name: item.provinceName,
+					// 	value: item.synthesizeNum
+					// })
+					// this.taskData.push({
+					// 	name: item.provinceName,
+					// 	value: item.taskNum
+					// })
 					this.remouldData.push({
 						name: item.provinceName,
 						value: item.remouldNum
 					})
 				})
-				this.synthesizeMax = Math.max.apply(null, this.synthesizeData.map(function (o) {return o.value}))
-				this.taskMax =  Math.max.apply(null, this.taskData.map(function (o) {return o.value}))
+				// this.synthesizeMax = Math.max.apply(null, this.synthesizeData.map(function (o) {return o.value}))
+				// this.taskMax =  Math.max.apply(null, this.taskData.map(function (o) {return o.value}))
 				this.remouldMax = Math.max.apply(null, this.remouldData.map(function (o) {return o.value}))
 				
-				this.getChart(this.synthesizeData,this.convertData(this.synthesizeData),this.synthesizeMax)
+				this.getChart(this.remouldData,this.convertData(this.remouldData),this.remouldMax)
 				setTimeout(()=>{
 					this.event()
 				},5000)

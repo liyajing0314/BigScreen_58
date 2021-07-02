@@ -21,21 +21,21 @@
 			</span>
 		</div>
 		<div class="bottom-item">
-			<span class="labels">智能化改造项目</span>
+			<span class="labels">覆盖面积（m²）</span>
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.intelligentizeRemouldProjectNum || 0)"
+				  :end-val="Number(data.squareNum || 0)"
 				  separator=","
 				/>
 			</span>
 		</div>
 		<div class="bottom-item">
-			<span class="labels">工牌数量</span>
+			<span class="labels">智能化改造项目</span>
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.workCardNum || 0)"
+				  :end-val="Number(data.intelligentizeRemouldProjectNum || 0)"
 				  separator=","
 				/>
 			</span>
@@ -49,12 +49,13 @@
 				  separator=","
 				/>
 			</span>
-		</div><div class="bottom-item">
-			<span class="labels">覆盖面积（m²）</span>
+		</div>
+		<div class="bottom-item">
+			<span class="labels">工牌数量</span>
 			<span class="nums">
 				<countTo
 				  :start-val="0"
-				  :end-val="Number(data.squareNum || 0)"
+				  :end-val="Number(data.workCardNum || 0)"
 				  separator=","
 				/>
 			</span>

@@ -2,7 +2,7 @@
 	<div class="container supervise_bg">
 		<div style="position: absolute;z-index: 3;width:100%;height: 100%;">
 			<div class="head">
-				<div class="head-title" @click="toFull">58企服服务数据看板</div>
+				<div class="head-title" @click="toFull">58企服劳动力智能化驾驶舱</div>
 			</div>
 			<div class="content">
 				<div class="con-left" ref="con_left">
